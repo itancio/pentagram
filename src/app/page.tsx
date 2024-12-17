@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Masonry from "./components/Masonry";
-import { cards } from "./components/CardsData";
+import { cards } from "../components/CardsData";
+import Masonry from "../components/Masonry";
+import Dashboard from "../components/Dashboard";
 
 export default function Home() {
   const [inputText, setInputText] = useState<string>("");
@@ -55,11 +56,12 @@ export default function Home() {
           </div>
         </form>
       </div>
-
       {/* Image Grid */}
       <main className="flex-1">
         <Masonry cards={cards} />
       </main>
+      {/* Dashboard */}
+      <Dashboard />
     </div>
   );
 }

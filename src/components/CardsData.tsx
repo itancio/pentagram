@@ -1,5 +1,5 @@
 import { Card } from "./Interface";
-import placeholder from "../images/placeholder.png";
+import placeholder from "../app/images/placeholder.png";
 
 export const cards: Card[] = [
   {
