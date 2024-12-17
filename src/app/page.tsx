@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { cards } from "../components/CardsData";
-import Masonry from "../components/Masonry";
-import Dashboard from "../components/Dashboard";
+import { cards } from "@/components/CardsData";
+import Masonry from "@/components/Masonry";
+import Dashboard from "@/components/Dashboard";
 
 export default function Home() {
   const [inputText, setInputText] = useState<string>("");

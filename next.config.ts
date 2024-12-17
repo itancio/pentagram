@@ -2,7 +2,7 @@ module.exports = {
   images: {
     localPatterns: [
       {
-        pathname: "/assets/images/**",
+        pathname: "/images/**",
         search: "",
       },
     ],
