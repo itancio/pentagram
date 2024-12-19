@@ -1,5 +1,13 @@
 # Pentagram: Instagram, but with AI Images
 
+## Features:
+
+## Tech Stack
+* Modal
+* Python
+* Typescript
+* Firebase/ Convex
+
 **SOURCES**:
 
 - [Getting started with Modal](https://modal.com/docs/examples/hello_world)
@@ -54,3 +62,5 @@ To learn more about Next.js, take a look at the following resources:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+## Common Issues & Troubleshooting
