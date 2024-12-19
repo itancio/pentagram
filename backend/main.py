@@ -50,7 +50,7 @@ flux_image = (
         "fastapi[standard]==0.115.4",
         "torchvision==0.20.1",
     )
-    .env({"HF_HUB_ENABLE_HF_TRANSFER": "1"}).  # faster downloads
+    .env({"HF_HUB_ENABLE_HF_TRANSFER": "1"})  # faster downloads
 )
 
 # Torch compilation needs to be re-executed when each new container starts, 
@@ -133,10 +133,10 @@ class Model:
       modal.parameter(default=0)
     )
 
-    def setup_model(self)
+    # def setup_model(self):
     @modal.build()
     @modal.enter()
-    def __init__(self):
+    def initDiffuser(self):
         """
         Initialize our diffusion model
         """
@@ -155,11 +155,8 @@ class Model:
             prompt,
             height=1024,
             width=1024,
-            guidance_scale=3.5,
-            num_inference_steps=NUM_INFERENCE_STEPS,
-            max_sequence_length=512,
+            num_inference_steps=NUM_INFERENCE_STEPS, # turbo is tuned to run in four steps
             num_images_per_prompt=batch_size,  # outputting multiple images per prompt is much cheaper than separate calls
-            num_inference_steps=4,  # turbo is tuned to run in four steps
             guidance_scale=3.5,  # turbo doesn't use CFG
             max_sequence_length=512,  # T5-XXL text encoder supports longer sequences, more complex prompts
         ).images
@@ -288,7 +285,7 @@ def ui():
             "index.html",
             {
                 "request": request,
-                "inference_url": Inference.web.web_url,
+                "inference_url": Model.web.web_url,
                 "model_name": "Stable Diffusion 3.5 Large Turbo",
                 "default_prompt": "A cinematic shot of a baby raccoon wearing an intricate italian priest robe.",
             },
