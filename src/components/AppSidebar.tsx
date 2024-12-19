@@ -3,11 +3,13 @@
 import { NavFavorites } from "@/components/NavFavorites";
 import { NavUser } from "@/components/NavUser";
 import {
-  Sidebar,
-  SidebarContent,
-  SidebarHeader,
-  SidebarMenuButton,
-  SidebarRail,
+    Sidebar,
+    SidebarContent,
+    SidebarHeader,
+    SidebarMenu,
+    SidebarMenuButton,
+    SidebarMenuItem,
+    SidebarRail,
 } from "@/components/ui/sidebar";
 import * as React from "react";
 
@@ -71,12 +73,21 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar className="border-r-0" {...props}>
       <SidebarHeader>
-        <SidebarMenuButton>
-          <NavUser
-            user={{ name: "John", email: "example@mail.com", avatar: "" }}
-          />
-        </SidebarMenuButton>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton size="lg" asChild>
+              <NavUser
+                user={{
+                  name: "John",
+                  email: "example@mail.com",
+                  avatar: "",
+                }}
+              />
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
       </SidebarHeader>
+
       <SidebarContent>
         <NavFavorites favorites={data.favorites} />
       </SidebarContent>
