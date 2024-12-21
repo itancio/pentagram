@@ -20,7 +20,7 @@ export default function Home() {
       });
 
       const data = await response.json();
-      console.log("data frontend received:data);
+      console.log(data);
       setInputText("");
     } catch (error) {
       console.error("Error:", error);
@@ -48,7 +48,7 @@ export default function Home() {
             />
             <button
               type="submit"
-              disabled={!inputText || isLoading}
+              disabled={isLoading}
               className="px-6 py-3 rounded-lg bg-foreground text-background hover:bg-[#383838] dark:hover:bg-[#ccc] transition-colors disabled:opacity-50"
             >
               {isLoading ? "Generating..." : "Generate"}

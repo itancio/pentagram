@@ -149,7 +149,7 @@ with image.imports():
 #================================================================================================
 @app.cls(
     image=image,
-    secrets=[modal.Secret.from_name("custom-secret", required_keys=["HF_TOKEN"])],
+    secrets=[modal.Secret.from_name("huggingface-secret", required_keys=["HF_TOKEN"])],
     gpu="a10g",     # Cheapest GPU
     container_idle_timeout=20 * MINUTES,
     timeout=60 * MINUTES,  # leave plenty of time for compilation
