@@ -12,6 +12,7 @@ import {
     SidebarRail,
 } from "@/components/ui/sidebar";
 import * as React from "react";
+import { favoritesData } from "./CardsData";
 
 // This is sample data.
 const data = {
@@ -89,7 +90,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
 
       <SidebarContent>
-        <NavFavorites favorites={data.favorites} />
+        <NavFavorites favorites={favoritesData.favorites} />
       </SidebarContent>
 
       <SidebarRail />

@@ -67,3 +67,24 @@ export const cards: Card[] = [
     heightClass: "h-[22rem] sm:h-[26rem] md:h-[30rem]",
   },
 ];
+
+export const favoritesData = {
+  favorites: [
+    {
+      name: "A magical forest with luminescent mushrooms, fairy lights hanging from ancient trees, and a glowing portal in the distance.",
+      url: "https://emyttadgzph93ujq.public.blob.vercel-storage.com/17df5a11-8da5-4115-8527-c7b670dba13f-IwTYVLoQSA0qIMB2qmtOu1RPnIaOeE.jpg",
+    },
+    {
+      name: "A futuristic cityscape at sunset, with flying cars and towering glass buildings reflecting golden light.",
+      url: "https://emyttadgzph93ujq.public.blob.vercel-storage.com/fd0ede8f-582d-4d43-b271-2c2a5d7bc71f-adEncCRdzi325JUQWeMNdv5KxiPu08.jpg",
+    },
+    {
+      name: "A close-up of a futuristic robot with a sleek design, human-like features, and glowing blue eyes.",
+      url: "https://emyttadgzph93ujq.public.blob.vercel-storage.com/67be17a4-048b-4844-b965-5e38aca8dd88-d5CrXCxa919CgRVIg40wGCmO43m02Q.jpg",
+    },
+    {
+      name: "A medieval castle perched on a cliff, surrounded by a stormy sea with waves crashing against the rocks.",
+      url: "https://emyttadgzph93ujq.public.blob.vercel-storage.com/fc950a53-a62d-427a-86a2-0aaaf65c9a34-VnbSIjYLUJrBMlOzzebd7a40YaC5uF.jpg",
+    },
+  ],
+};
