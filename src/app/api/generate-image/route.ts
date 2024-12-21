@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import { put } from '@vercel/blob';
+import crypto from 'crypto';
 
 export async function POST(request: Request) {
   try {
@@ -27,7 +29,7 @@ export async function POST(request: Request) {
     console.log("Requesting URL:", url.toString());
     console.log(process.env.API_KEY);
 
-    // Call the Image Generation API
+    // Call the Image Generation Modal API
     const response = await fetch(url.toString(), {
       method: "GET",
       headers: {
@@ -48,9 +50,8 @@ export async function POST(request: Request) {
 
     // Upload image to vercel
     const imgBuffer = await response.arrayBuffer();
-
     const filename = `${crypto.randomUUID()}.jpg`
-    const blog = await put(
+    const blob = await put(
       filename, 
       imgBuffer, 
       {
@@ -58,11 +59,11 @@ export async function POST(request: Request) {
         contentType: "image/jpeg"
       })
 
-    const responseData = response.body;
+    console.log("Image uploaded to vercel:", blob);
 
     return NextResponse.json({
       success: true,
-      data: responseData,
+      imageUrl: blob.url,
     });
   } catch (err) {
     console.error("Error processing request:", err);
