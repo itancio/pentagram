@@ -27,6 +27,8 @@ image = modal.Image.debian_slim(python_version="3.12").pip_install(
     "accelerate",
     "diffusers",
     'requests',
+    "torch",
+    "torchao"
 ).run_function(download_model)
 
 app = modal.App("pentagram", image=image)
@@ -38,15 +40,15 @@ app = modal.App("pentagram", image=image)
     container_idle_timeout=300,     # 5 minutes
     secrets=[modal.Secret.from_name("custom-secret"),
              modal.Secret.from_name("huggingface-secret")],
-    volumes={  # add Volumes to store serializable compilation artifacts, see section on torch.compile below
-        "/root/.nv": modal.Volume.from_name("nv-cache", create_if_missing=True),
-        "/root/.triton": modal.Volume.from_name(
-            "triton-cache", create_if_missing=True
-        ),
-        "/root/.inductor-cache": modal.Volume.from_name(
-            "inductor-cache", create_if_missing=True
-        ),
-    }
+    # volumes={  # add Volumes to store serializable compilation artifacts, see section on torch.compile below
+    #     "/root/.nv": modal.Volume.from_name("nv-cache", create_if_missing=True),
+    #     "/root/.triton": modal.Volume.from_name(
+    #         "triton-cache", create_if_missing=True
+    #     ),
+    #     "/root/.inductor-cache": modal.Volume.from_name(
+    #         "inductor-cache", create_if_missing=True
+    #     ),
+    # }
 )
 class Model:
     @modal.build()
@@ -84,6 +86,9 @@ class Model:
         # Add scheduler
         self.pipeline.scheduler = EulerDiscreteScheduler.from_config(self.pipeline.scheduler.config)
 
+        # Combine attention projection matrices.
+        self.pipeline.fuse_qkv_projections()
+
         # change UNet and VAE's memory layout to channel's last when compiling to ensure max speed
         self.pipeline.unet.to(memory_format=torch.channels_last)
         self.pipeline.vae.to(memory_format=torch.channels_last)
@@ -101,6 +106,8 @@ class Model:
         torch._inductor.config.coordinate_descent_tuning = True
         torch._inductor.config.epilogue_fusion = False
         torch._inductor.config.coordinate_descent_check_all_directions = True
+        torch._inductor.config.force_fuse_int_mm_with_mul = True
+        torch._inductor.config.use_mixed_mm = True
 
 
     @modal.web_endpoint()
@@ -113,9 +120,6 @@ class Model:
 
         # Security check for authorized access to our API
         api_key = request.headers.get("X-API-Key")
-
-        print("api_key received: ", api_key)
-        print("api_key in secret:", self.API_KEY)
 
         if api_key != self.API_KEY:
             raise HTTPException(

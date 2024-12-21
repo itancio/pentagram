@@ -3,19 +3,19 @@
 import { NavFavorites } from "@/components/NavFavorites";
 import { NavUser } from "@/components/NavUser";
 import {
-    Sidebar,
-    SidebarContent,
-    SidebarHeader,
-    SidebarMenu,
-    SidebarMenuButton,
-    SidebarMenuItem,
-    SidebarRail,
+  Sidebar,
+  SidebarContent,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarRail,
 } from "@/components/ui/sidebar";
 import * as React from "react";
 import { favoritesData } from "./CardsData";
 
 // This is sample data.
-const data = {
+export const data = {
   favorites: [
     {
       name: "Project Management & Task Tracking",
